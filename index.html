@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO APP</title>
+    <script>
+        let globalId = 1;
+        function markAsDone(todoid){
+            const parent = document.getElementById(todoid);
+            parent.children[2].innerHTML = "DONE!"
+        }
+        function createChild(tittle,description,id){
+            const child = document.createElement("div");
+            const firstGrandChild = document.createElement("div");
+            firstGrandChild.innerHTML = tittle;
+            const secondGrandChild = document.createElement("div");
+            secondGrandChild.innerHTML = description;
+            const thirdGrandChild = document.createElement("button");
+            thirdGrandChild.innerHTML = "mark as done"
+            thirdGrandChild.setAttribute("onClick",`markAsDone(${id})`)
+            child.append(firstGrandChild);
+            child.append(secondGrandChild);
+            child.append(thirdGrandChild);
+            child.setAttribute("id",id);
+            return child;
+        }
+        function addtodo(){
+            const tittle = document.getElementById("tittle").value;
+            const description = document.getElementById("description").value;
+            const container = document.getElementById("container");
+           container.appendChild(createChild(tittle,description,globalId++));
+        }
+    </script>
+</head>
+<body style="background-color: grey;">
+    <div>
+        <input id="tittle" type="text" placeholder="title"> <br></br>
+        <input id="description" placeholder="description"><br></br>
+        <button onclick="addtodo()">add todo</button><br></br>
+        <div id="container"></div>
+    </div>
+</body>
+</html> 
